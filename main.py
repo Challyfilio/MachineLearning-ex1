@@ -10,18 +10,17 @@ def computeCost(x, y, theta):
     return result
 
 
-# 梯度下降a
-def gradientDescent(x, y, theta, alpha, iters):
+# 梯度下降
+def gradientDescent(x, y, theta, alpha, iters):  # alpha：学习率
     temp = np.matrix(np.zeros(theta.shape))
     parameters = int(theta.ravel().shape[1])  # 2列
     cost = np.zeros(iters)  # iters个0数组
 
-    for i in range(iters):  # 更新θ0，θ1
+    for i in range(iters):
         error = (x * theta.T) - y
         for j in range(parameters):
             term = np.multiply(error, x[:, j])  # (hθ(x)-y)x
-            temp[0, j] = theta[0, j] - ((alpha / len(x)) * np.sum(term))
-
+            temp[0, j] = theta[0, j] - ((alpha / len(x)) * np.sum(term))  # 更新θ0，θ1
         theta = temp
         cost[i] = computeCost(x, y, theta)
     return theta, cost
@@ -73,7 +72,7 @@ plt.show()
 
 fig, ax = plt.subplots(figsize=(12, 8))
 ax.plot(np.arange(iters), cost)
-ax.set_ylabel('Iters')
+ax.set_xlabel('Iters')
 ax.set_ylabel('Cost')
 plt.show()
 '''
@@ -122,7 +121,7 @@ plt.show()
 
 fig, ax = plt.subplots(figsize=(12, 8))
 ax.plot(np.arange(iters), cost2)
-ax.set_ylabel('Iters')
+ax.set_xlabel('Iters')
 ax.set_ylabel('Cost')
 plt.show()
 # '''
